@@ -20,3 +20,22 @@ export const connectRabbitMQ = async () => {
 
 
 
+export const publishToQueue = async (queueName: string, message: any) => {
+    if (!channel) {
+        console.error("RabbitMQ channel is not established.");
+        return;
+    }
+    try {
+        await channel.assertQueue(queueName, {
+            durable: true,
+        });
+        channel.sendToQueue(
+            queueName,
+            Buffer.from(JSON.stringify(message)),
+            { persistent: true }
+        );
+        console.log(`📦 Message sent to queue ${queueName}:`, message);
+    } catch (error) {
+        console.error("💔 Failed to publish message to RabbitMQ:", error);
+    }
+}
