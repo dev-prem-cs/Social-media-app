@@ -4,6 +4,7 @@ export const tryCatch = (handler: RequestHandler): RequestHandler => {
         try {
             await handler(req, res, next);
         } catch (error:any ) {
+            console.error("Error in tryCatch:", error);
             res.status(500).json({ message: "Internal Server Error", error: error.message });
         }
     };

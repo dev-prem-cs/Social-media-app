@@ -62,7 +62,7 @@ export const startSendOTPConsumer = async () => {
                 }
             }
         });
-    } catch (error) {
-        console.error("Error in startSendOTPConsumer:", error);
+    } catch (error: any) {
+        console.error("Error in startSendOTPConsumer:", error.message);
     }
 };

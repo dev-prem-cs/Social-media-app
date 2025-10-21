@@ -52,3 +52,11 @@ export const verifyOtp=tryCatch(async(req,res)=>{
 
         res.status(200).json({message:"OTP verified successfully.", token,user});
 });
+
+
+
+
+export const getUserProfile=tryCatch(async(req,res)=>{
+        const user = (req as any).user;
+        res.status(200).json({user});
+})
